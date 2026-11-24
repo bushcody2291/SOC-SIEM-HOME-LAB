@@ -1,0 +1,160 @@
+
+# SOC Analyst Investigation Workflow
+
+## Overview
+
+This document outlines the investigation process used in my cybersecurity home lab.
+
+The workflow demonstrates a structured approach to reviewing security events, validating alerts, analyzing supporting evidence, determining severity, and documenting investigation results.
+
+## Investigation Lifecycle
+
+```mermaid
+flowchart TD
+    A[Alert or Security Event] --> B[Initial Triage]
+    B --> C[Identify Event Source]
+    C --> D[Collect Supporting Evidence]
+    D --> E[Analyze Activity and Context]
+    E --> F{Suspicious Activity?}
+    F -->|No| G[Document Benign Activity]
+    F -->|Yes| H[Assess Severity and Scope]
+    H --> I[Determine Escalation Requirements]
+    I --> J[Document Findings]
+    G --> J
+    J --> K[Close or Escalate Investigation]
+```
+
+## 1. Alert Identification
+
+Identify the security event or activity requiring investigation.
+
+Examples:
+- Multiple failed authentication attempts
+- Unexpected PowerShell execution
+- Suspicious process creation
+- Unusual parent-child process relationships
+- Unexpected system activity
+
+**Tools:** Splunk Enterprise, Windows Event Viewer, Sysmon
+
+## 2. Initial Triage
+
+Establish the basic details of the event.
+
+Review:
+- Event timestamp
+- Host or workstation
+- Event ID
+- Username, when available
+- Event source
+- Frequency of activity
+
+**Objective:** Determine what happened and whether additional investigation is necessary.
+
+## 3. Evidence Collection
+
+Gather relevant telemetry from available data sources.
+
+Examples:
+- Windows Security Logs
+- Windows System Logs
+- Windows Application Logs
+- Sysmon Operational Logs
+- Process creation events
+- Authentication events
+
+**Objective:** Build an evidence-based understanding of the activity.
+
+## 4. Activity Analysis
+
+Review the collected evidence and investigate the surrounding context.
+
+Depending on the event, examine:
+- Source IP address
+- Logon type
+- Authentication status codes
+- Executable paths
+- Command-line arguments
+- Parent-process information
+- Process identifiers
+- Related timestamps
+
+**Objective:** Determine whether the activity is expected, unusual, or potentially suspicious.
+
+## 5. Classification and Severity Assessment
+
+Classify the activity based on available evidence.
+
+Possible classifications:
+- Benign / Authorized Activity
+- Suspicious / Requires Further Investigation
+- Confirmed Malicious Activity
+
+Consider:
+- Potential impact
+- Scope of affected systems
+- Evidence of unauthorized access
+- Whether the activity can be explained by legitimate system or user behavior
+
+Do not classify activity as malicious based solely on a keyword, executable name, or isolated event.
+
+## 6. Escalation Decision
+
+Determine whether the investigation can be closed or requires additional attention.
+
+Possible outcomes:
+- Close as benign
+- Continue monitoring
+- Escalate for additional investigation
+- Follow organizational incident response procedures
+
+Any containment or remediation action should follow appropriate authorization and organizational procedures.
+
+## 7. Documentation
+
+Record the investigation in a structured incident report.
+
+Include:
+- Incident identifier
+- Investigation objective
+- Data sources
+- Detection query
+- Relevant findings
+- Evidence and timestamps
+- Classification
+- Severity
+- Escalation decision
+- Final conclusion
+- Investigation limitations
+
+## 8. Closure and Lessons Learned
+
+Close the investigation when the available evidence supports a documented conclusion and any required escalation has been completed.
+
+Identify opportunities to improve:
+- Detection queries
+- Log collection
+- Alert accuracy
+- Investigation procedures
+- Documentation
+
+## Workflow Demonstrations
+
+The following investigations demonstrate this process:
+
+| Investigation | Focus |
+|---|---|
+| Incident Report #001 | Multiple failed authentication attempts |
+| Incident Report #002 | PowerShell process execution |
+
+## Tools and Technologies
+
+- Splunk Enterprise
+- Search Processing Language (SPL)
+- Windows Security Event Logging
+- Microsoft Sysmon
+- Windows PowerShell
+
+---
+
+*This workflow was developed for educational and portfolio purposes in an authorized personal cybersecurity lab. It is not a substitute for an organization's approved incident response procedures.*
